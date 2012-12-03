@@ -35,27 +35,72 @@ page = urllib2.urlopen ('http://www.dclibrary.org/newsreleases')
 
 content = page.read() ## Some people on the #python freenode irc recommended this.
 
+import re
+for term in SEARCHTERMS: re.findall (term + '.*', content)
+##The line above is inspired by a line @Fichtitious
+##mentioned in a tutorial email he sent me:
+##re.findall('Published on.*', content)
+##@Fichtitious explained the following:
+##''.' is the wildcard character, and '*' means 0 or
+##more occurrences of the preceding character.  So
+##'.*' means go match 0 or more of anything, and
+##'Published on.*' means go match 'Published on'
+##followed by 0 or more of anything.
+##By default, all re matches go only as far as
+##the end of the line, so this time we matched each
+##occurrence of 'Published on' and all the
+##characters coming after it until the next newline.'
+##I wasn't sure if I'd be able to concatenate
+##'.*' with my variable 'term,' but it looks like
+##this worked!
 
+##Next step: Right now, the program returns the search
+##term and a few words next to it. It would be more useful
+##if I could do the following:
+##1) Find the headline of the news item in which the search
+##term appears.
+##2) Find the publication date. (The tip from @Fichtitious
+##should help a lot here.
+##3) Find a few more context words surrounding the search term.
+##Maybe get the whole sentence. That would be cool.
+##4) Store all of the above into a dictionary.
+##5) Maybe prompt the user (me, I'm assuming) to enter a
+##numerical rating of how interesting or relevant the article
+##was. Save the rating in the dictionary. 
+
+##Things that might help me with next step #1:
+##For #1, here are two examples of what headlines
+##look like:
+##<h3 class="field-content"><a href="/node/29718">Photo/Film Requests</a></h3>
+##<h3 class="field-content"><a href="/node/31486">Chris Tonjes Appointed Chief Information Officer of Baltimore, MD </a></h3>  </div>  
+##Also, @Fichtitious gave me this link to help me see more
+##terms I can use with re:
+##http://docs.python.org/2/library/re.html
+##One of the examples @Fichtitious emailed me shows
+##how to tell the program to stop returning something when it hits
+##an html tag like </h3>. So, if I can figure out
+##how to use a found instance of a search term as a
+##starting point and then backtrack to a tag starting with
+##<h3, I might be onto something. I could find
+##where on the page the word 'technology' gets mentioned,
+##for instance, then leap back a bit and find the headline
+##of that article!
+
+
+
+
+###Eventual step: apply some of the more advanced
+###moves @Fichtitious mentioned in the email he sent me.
+
+
+
+
+##OUTTAKE
 ##@Fichtitious recommended the below for my
-##PracticeWebscraper, but I'm not sure if it
+##PracticeWebscraper project, but I'm not sure if it
 ##will work with the current project.
 ##import json
 ##forecast = json.load (page)
 
 
-###Next step: Learn some string parsing
-##so that I can make sense of all of the
-##information that gets returned when
-##I execute page.read().
-##@Fichtitious recommended dots and stars.
 
-
-
-##Moved folder from my desktop.
-
-'''
-<h3 class="field-content"><a href="/node/29718">Photo/Film Requests</a></h3>
-
-<h3 class="field-content"><a href="/node/31486">Chris Tonjes Appointed Chief Information Officer of Baltimore, MD </a></h3>  </div>  
-
-'''
