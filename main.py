@@ -48,3 +48,14 @@ content = page.read() ## Some people on the #python freenode irc recommended thi
 ##information that gets returned when
 ##I execute page.read().
 ##@Fichtitious recommended dots and stars.
+
+
+
+##Moved folder from my desktop.
+
+'''
+<h3 class="field-content"><a href="/node/29718">Photo/Film Requests</a></h3>
+
+<h3 class="field-content"><a href="/node/31486">Chris Tonjes Appointed Chief Information Officer of Baltimore, MD </a></h3>  </div>  
+
+'''
