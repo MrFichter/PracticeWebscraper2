@@ -79,7 +79,7 @@ for result in results: print '\n' , result
 ##1) Find the headline of the news item in which the search
 ##term appears.
 ##2) Find the publication date. (The tip from @Fichtitious
-##should help a lot here.
+##should help a lot here.)
 ##3) Find a few more context words surrounding the search term.
 ##Maybe get the whole sentence. That would be cool.
 ##4) Store all of the above into a dictionary.
@@ -88,7 +88,12 @@ for result in results: print '\n' , result
 ##was. Save the rating in the dictionary.
 
 ##Things that might help with step #1/4:
-##See this file: AddNewLinesToListAttemptTranscriptIDLE.py
+##See this file: listLineSeparator.py
+##It works with testList. Now, see if you can get it
+##to work with any list you feed it.
+##My slashFormat function in fileDistributor
+##might remind me how to make a function
+##a stand-alone script.
 
 ##Things that might help with with step #1/2:
 ##<bob_f> MrFichter: Yes, create your regex using re.compile and pass flags=re.IGNORECASE
