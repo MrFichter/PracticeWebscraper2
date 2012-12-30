@@ -26,7 +26,8 @@
 
 SEARCHTERMS = ('technology' , 'tech ' , 'student' , 'students' ,
                'hackathon' , 'hack' , 'hacker' , 'hackers' , 'mobile' ,
-               'computer' , 'computers' )
+               'computer' , 'computers' , 'books')
+### books is for testing purposes
 
 
 import urllib2 ## There's also urllib, but @Fichtitious recommended urllib2.
@@ -36,7 +37,9 @@ page = urllib2.urlopen ('http://www.dclibrary.org/newsreleases')
 content = page.read() ## Some people on the #python freenode irc recommended this.
 
 import re
-for term in SEARCHTERMS: re.findall (term + '.*', content)
+for term in SEARCHTERMS: print (re.findall (term + '.*', content)) ### print is for test purposes
+
+
 ##The line above is inspired by a line @Fichtitious
 ##mentioned in a tutorial email he sent me:
 ##re.findall('Published on.*', content)
@@ -53,6 +56,8 @@ for term in SEARCHTERMS: re.findall (term + '.*', content)
 ##I wasn't sure if I'd be able to concatenate
 ##'.*' with my variable 'term,' but it looks like
 ##this worked!
+
+##re.findall returns results at a list
 
 ##Next step: Right now, the program returns the search
 ##term and a few words next to it. It would be more useful
