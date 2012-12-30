@@ -26,9 +26,11 @@
 
 SEARCHTERMS = ('technology' , 'tech ' , 'student' , 'students' ,
                'hackathon' , 'hack' , 'hacker' , 'hackers' , 'mobile' ,
-               'computer' , 'computers' , 'books')
+               'computer' , 'computers' , 'books' )
 ### books is for testing purposes
 
+results = []
+resultsForPrinting = [] ### experimental: trying to get a neater printout
 
 import urllib2 ## There's also urllib, but @Fichtitious recommended urllib2.
 
@@ -37,7 +39,16 @@ page = urllib2.urlopen ('http://www.dclibrary.org/newsreleases')
 content = page.read() ## Some people on the #python freenode irc recommended this.
 
 import re
-for term in SEARCHTERMS: print (re.findall (term + '.*', content)) ### print is for test purposes
+for term in SEARCHTERMS:
+    termResults = (re.findall (term + '.*', content)) ### print is for test purposes
+    results.append (termResults)
+
+    ### experimental: trying to get a neater printout
+    ## termResults is a list.
+    resultsForPrinting.append (termResults)
+    
+
+for result in results: print '\n' , result
 
 
 ##The line above is inspired by a line @Fichtitious
@@ -62,6 +73,9 @@ for term in SEARCHTERMS: print (re.findall (term + '.*', content)) ### print is 
 ##Next step: Right now, the program returns the search
 ##term and a few words next to it. It would be more useful
 ##if I could do the following:
+##1/4) Get easier-to-read results for my search of 'books,'
+##which returns a really long list without any line spaces.
+##1/2) Search for uppercase variants of the terms in SEARCHTERMS.
 ##1) Find the headline of the news item in which the search
 ##term appears.
 ##2) Find the publication date. (The tip from @Fichtitious
@@ -71,7 +85,13 @@ for term in SEARCHTERMS: print (re.findall (term + '.*', content)) ### print is 
 ##4) Store all of the above into a dictionary.
 ##5) Maybe prompt the user (me, I'm assuming) to enter a
 ##numerical rating of how interesting or relevant the article
-##was. Save the rating in the dictionary. 
+##was. Save the rating in the dictionary.
+
+##Things that might help with step #1/4:
+##See this file: AddNewLinesToListAttemptTranscriptIDLE.py
+
+##Things that might help with with step #1/2:
+##<bob_f> MrFichter: Yes, create your regex using re.compile and pass flags=re.IGNORECASE
 
 ##Things that might help me with next step #1:
 ##For #1, here are two examples of what headlines
