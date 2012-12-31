@@ -24,10 +24,10 @@
 ##https://github.com/MrFichter/PracticeWebscraper/blob/master/PracticeWebscraper.py
 
 
-SEARCHTERMS = ('technology' , 'tech ' , 'student' , 'students' ,
-               'hackathon' , 'hack' , 'hacker' , 'hackers' , 'mobile' ,
-               'computer' , 'computers' , 'books' ) ### books is for \
-##testing purposes
+SEARCHTERMS = ('technology' , 'tech ' , 'student' , 'hackathon' , 'hack' , 'hacker' , 'hackers' , 'mobile' ,
+               'computer' , 'book' ) ### book is for testing purposes
+##Learning note: Searching for 'book' appears to find 'books' without
+##a problem.
 
 results = []
 printableResults = [] ## This list will include labels \
@@ -80,9 +80,8 @@ listPrintLineBreaks (printableResults)
 ##Next step: Right now, the program returns the search
 ##term and a few words next to it. It would be more useful
 ##if I could do the following:
-##1/4) Get easier-to-read results for my search of 'books,'
-##which returns a really long list without any line spaces.
 ##1/2) Search for uppercase variants of the terms in SEARCHTERMS.
+##3/4) Search for plural variants of the terms.
 ##1) Find the headline of the news item in which the search
 ##term appears.
 ##2) Find the publication date. (The tip from @Fichtitious
