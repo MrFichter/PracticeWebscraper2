@@ -26,30 +26,24 @@
 
 SEARCHTERMS = ('technology' , 'tech ' , 'student' , 'students' ,
                'hackathon' , 'hack' , 'hacker' , 'hackers' , 'mobile' ,
-               'computer' , 'computers' , 'books' )
-### books is for testing purposes
+               'computer' , 'computers' , 'books' ) ### books is for \
+##testing purposes
 
 results = []
-resultsForPrinting = [] ### experimental: trying to get a neater printout
+printableResults = [] ## This list will include labels \
+##indicating to which search term the results correspond.
 
-import urllib2 ## There's also urllib, but @Fichtitious recommended urllib2.
+import urllib2 ## There's also urllib, but @Fichtitious \
+##recommended urllib2.
 
 page = urllib2.urlopen ('http://www.dclibrary.org/newsreleases')
 
-content = page.read() ## Some people on the #python freenode irc recommended this.
+content = page.read() ## Some people on the #python freenode irc \
+##recommended this.
 
 import re
 for term in SEARCHTERMS:
-    termResults = (re.findall (term + '.*', content)) ### print is for test purposes
-    results.append (termResults)
-
-    ### experimental: trying to get a neater printout
-    ## termResults is a list.
-    resultsForPrinting.append (termResults)
-    
-
-for result in results: print '\n' , result
-
+    termResults = re.findall (term + '.*', content)
 
 ##The line above is inspired by a line @Fichtitious
 ##mentioned in a tutorial email he sent me:
@@ -68,8 +62,21 @@ for result in results: print '\n' , result
 ##'.*' with my variable 'term,' but it looks like
 ##this worked!
 
-##re.findall returns results at a list
+##re.findall () returns results at a list
 
+    results.append (termResults)
+
+    termLabel = ['RESULTS FOR TERM: ' + str.upper (term)]
+    printableResults.append (termLabel)
+    printableResults.append (termResults)
+
+from listPrintLineBreaks import listPrintLineBreaks
+listPrintLineBreaks (printableResults)
+
+    
+
+
+##-----------------------------
 ##Next step: Right now, the program returns the search
 ##term and a few words next to it. It would be more useful
 ##if I could do the following:
@@ -96,7 +103,8 @@ for result in results: print '\n' , result
 ##a stand-alone script.
 
 ##Things that might help with with step #1/2:
-##<bob_f> MrFichter: Yes, create your regex using re.compile and pass flags=re.IGNORECASE
+##<bob_f> MrFichter: Yes, create your regex using \
+##re.compile and pass flags=re.IGNORECASE
 
 ##Things that might help me with next step #1:
 ##For #1, here are two examples of what headlines
@@ -117,14 +125,11 @@ for result in results: print '\n' , result
 ##of that article!
 
 
-
-
 ###Eventual step: apply some of the more advanced
 ###moves @Fichtitious mentioned in the email he sent me.
 
 
-
-
+##----------------------------------
 ##OUTTAKE
 ##@Fichtitious recommended the below for my
 ##PracticeWebscraper project, but I'm not sure if it
