@@ -43,7 +43,19 @@ content = page.read() ## Some people on the #python freenode irc \
 
 import re
 for term in SEARCHTERMS:
-    termResults = re.findall (term + '.*', content)
+    termResults = re.findall ('(?i)' + term + '*.' , content) ## I learned \
+##about using '(?i)' or other (?iLmsux) terms from here:
+##http://stackoverflow.com/questions/500864/case-insensitive-python-regular-expression-without-re-compile
+##(See answer from aem999.)
+##Aem999 uses and r before the expression, which treats the string a a raw
+##string and would ignore the symbolism of things like \n, as explained here:
+##http://stackoverflow.com/questions/4780088/in-python-what-does-preceding-a-string-literal-with-r-mean
+### This needs some debugging. Maybe it's how printLineBreaks() works,
+### but the only results I'm getting are the words themselves. At least
+### the results appear to be case insensitive.
+
+
+## See @Roger Pate's comments about re.compile here: http://stackoverflow.com/questions/452104/is-it-worth-using-pythons-re-compile
 
 ##The line above is inspired by a line @Fichtitious
 ##mentioned in a tutorial email he sent me:
@@ -73,7 +85,6 @@ for term in SEARCHTERMS:
 from listPrintLineBreaks import listPrintLineBreaks
 listPrintLineBreaks (printableResults)
 
-    
 
 
 ##-----------------------------
@@ -81,7 +92,8 @@ listPrintLineBreaks (printableResults)
 ##term and a few words next to it. It would be more useful
 ##if I could do the following:
 ##1/2) Search for uppercase variants of the terms in SEARCHTERMS.
-##3/4) Search for plural variants of the terms.
+## (3/4) Find a good way to archive old commentary. Maybe
+## make them a separate text document.
 ##1) Find the headline of the news item in which the search
 ##term appears.
 ##2) Find the publication date. (The tip from @Fichtitious
@@ -92,14 +104,6 @@ listPrintLineBreaks (printableResults)
 ##5) Maybe prompt the user (me, I'm assuming) to enter a
 ##numerical rating of how interesting or relevant the article
 ##was. Save the rating in the dictionary.
-
-##Things that might help with step #1/4:
-##See this file: listLineSeparator.py
-##It works with testList. Now, see if you can get it
-##to work with any list you feed it.
-##My slashFormat function in fileDistributor
-##might remind me how to make a function
-##a stand-alone script.
 
 ##Things that might help with with step #1/2:
 ##<bob_f> MrFichter: Yes, create your regex using \
