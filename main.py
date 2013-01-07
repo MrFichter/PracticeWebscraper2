@@ -43,18 +43,17 @@ content = page.read() ## Some people on the #python freenode irc \
 
 import re
 for term in SEARCHTERMS:
-    termResults = re.findall ('(?i)' + term + '*.' , content) ## I learned \
-##about using '(?i)' or other (?iLmsux) terms from here:
+    termResults = re.findall ('(?i)' + term + '.*' , content) ## '(?i)' \
+##makes it case insensitive. It needs to come at the beginning, though.
+## I learned about using '(?i)' or other (?iLmsux) terms from here:
 ##http://stackoverflow.com/questions/500864/case-insensitive-python-regular-expression-without-re-compile
 ##(See answer from aem999.)
 ##Aem999 uses and r before the expression, which treats the string a a raw
 ##string and would ignore the symbolism of things like \n, as explained here:
 ##http://stackoverflow.com/questions/4780088/in-python-what-does-preceding-a-string-literal-with-r-mean
-### This needs some debugging. Maybe it's how printLineBreaks() works,
-### but the only results I'm getting are the words themselves. At least
-### the results appear to be case insensitive.
-
-
+##Note: <bob_f> from the python irc recommended an altnerative strategy:
+##MrFichter: Yes, create your regex using \
+##re.compile and pass flags=re.IGNORECASE
 ## See @Roger Pate's comments about re.compile here: http://stackoverflow.com/questions/452104/is-it-worth-using-pythons-re-compile
 
 ##The line above is inspired by a line @Fichtitious
@@ -91,7 +90,6 @@ listPrintLineBreaks (printableResults)
 ##Next step: Right now, the program returns the search
 ##term and a few words next to it. It would be more useful
 ##if I could do the following:
-##1/2) Search for uppercase variants of the terms in SEARCHTERMS.
 ## (3/4) Find a good way to archive old commentary. Maybe
 ## make them a separate text document.
 ##1) Find the headline of the news item in which the search
@@ -105,9 +103,6 @@ listPrintLineBreaks (printableResults)
 ##numerical rating of how interesting or relevant the article
 ##was. Save the rating in the dictionary.
 
-##Things that might help with with step #1/2:
-##<bob_f> MrFichter: Yes, create your regex using \
-##re.compile and pass flags=re.IGNORECASE
 
 ##Things that might help me with next step #1:
 ##For #1, here are two examples of what headlines
