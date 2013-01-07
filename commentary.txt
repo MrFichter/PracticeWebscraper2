@@ -1,3 +1,7 @@
+HOW I'LL USE THIS DOCUMENT:
+Moving forward, I will rely more heavily on the git log to do things like 
+pasting in the stackOverflow URLs of articles that explain my decisions.
+
 CASE-INSENSITIVE SEARCH:
 
 ## I learned about using '(?i)' or other (?iLmsux) terms from here:
