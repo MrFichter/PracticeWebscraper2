@@ -29,6 +29,14 @@ SEARCHTERMS = ('technology' , 'tech ' , 'student' , 'hackathon' , 'hack' , 'hack
 ##Learning note: Searching for 'book' appears to find 'books' without
 ##a problem.
 
+DCLIBRARYHEADLINEHTML = '<h3 class=\"field-content\">' + '.*' + '</a></h3>'
+### If the above works, use the line continuation character.
+### If something doesn't work, it's probably '.*'
+## I put in backslash marks before every internal quote.
+### Not sure if I need the below, which was the stuff in the middle.
+##<a href="/node/29718">Photo/Film Requests
+
+
 results = []
 printableResults = [] ## This list will include labels \
 ##indicating to which search term the results correspond.
@@ -57,13 +65,24 @@ from listPrintLineBreaks import listPrintLineBreaks
 listPrintLineBreaks (printableResults)
 
 
+### experimental
+headlineResults = re.findall (DCLIBRARYHEADLINEHTML , content)
+
+printableHeadlineResults = []
+printableHeadlineResults.append (headlineResults)
+
+
+listPrintLineBreaks (printableHeadlineResults)
+
+
 
 ##-----------------------------
 ##Next step: Right now, the program returns the search
-##term and a few words next to it. It would be more useful
-##if I could do the following:
-##1) Find the headline of the news item in which the search
-##term appears.
+##term and a few words next to it from one re.findall() and the headlines,
+##plus some another garbage, as the results of another re.findall(). It
+##would be more useful if I could do the following:
+##1) Find the only headline corresponding to the news item in which the
+##search term appears.
 ##2) Find the publication date. (The tip from @Fichtitious
 ##should help a lot here.)
 ##3) Find a few more context words surrounding the search term.
