@@ -30,11 +30,15 @@ SEARCHTERMS = ('technology' , 'tech ' , 'student' , 'hackathon' , 'hack' , 'hack
 ##a problem.
 
 DCLIBRARYHEADLINEHTML = '<h3 class=\"field-content\">' + '.*' + '</a></h3>'
+### Maybe I could simplify and could find just '<h3'
 ### If the above works, use the line continuation character.
 ### If something doesn't work, it's probably '.*'
 ## I put in backslash marks before every internal quote.
 ### Not sure if I need the below, which was the stuff in the middle.
 ##<a href="/node/29718">Photo/Film Requests
+
+##headline info I found by going into developer mode in Firefox
+HEADER = '<div class="views-field views-field-title"> '
 
 
 results = []
@@ -51,7 +55,13 @@ content = page.read() ## Some people on the #python freenode irc \
 
 import re
 for term in SEARCHTERMS:
-    termResults = re.findall ('(?i)' + term + '.*' , content) ## '(?i)' \
+    termResults = re.findall ('(?i)' + HEADER + '.*' + term + '.*' + HEADER, content) ## '(?i)' \
+    ### There's a chance the above might work if I told it not to stop \
+    ###searching at the end of a line. Otherwise, I should roll back to my previous commit.
+    
+    ### I commented out the line below, which works, to experiment with new \
+    ### strategy.
+    ## termResults = re.findall ('(?i)' + term + '.*' , content) ## '(?i)' \
 ##makes it case insensitive. It needs to come at the beginning.
 ##re.findall () returns results at a list.
 
