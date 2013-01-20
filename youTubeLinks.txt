@@ -1,0 +1,27 @@
+~4 min video, exporting to csv:
+
+http://www.youtube.com/watch?v=DcZTNwdWVeo
+
+
+series of longer videos about regular expressions by Derek Banas:
+
+
+http://www.youtube.com/watch?v=DRR9fOXkfRE
+
+
+Derek Banas video about web scraping with Python:
+
+http://www.youtube.com/watch?v=Ap_DlSrT-iE
+
+* At about 4 mins, he shows how to exclude the title tags.
+* At 7:40, he shows how to copy the first 1000 characters 
+that lie after a url div.
+*Watch how, at 8:50, he gets the title, link, and article 
+to show up neatly in groups. He has loops within loops. Doesn't
+show how to exclude some items, but I could probably figure
+that out.
+
+
+
+
+
