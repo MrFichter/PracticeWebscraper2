@@ -24,65 +24,61 @@
 ##https://github.com/MrFichter/PracticeWebscraper/blob/master/PracticeWebscraper.py
 
 
+
 SEARCHTERMS = ('technology' , 'tech ' , 'student' , 'hackathon' , 'hack' , 'hacker' , 'hackers' , 'mobile' ,
-               'computer' , 'book' ) ### book is for testing purposes
+               'computer' , 'book' ) ### book is for testing purposes. 
 ##Learning note: Searching for 'book' appears to find 'books' without
 ##a problem.
 
-DCLIBRARYHEADLINEHTML = '<h3 class=\"field-content\">' + '.*' + '</a></h3>'
-### Maybe I could simplify and could find just '<h3'
-### If the above works, use the line continuation character.
-### If something doesn't work, it's probably '.*'
-## I put in backslash marks before every internal quote.
-### Not sure if I need the below, which was the stuff in the middle.
-##<a href="/node/29718">Photo/Film Requests
-
-##headline info I found by going into developer mode in Firefox
-HEADER = '<div class="views-field views-field-title"> '
-
 
 results = []
-printableResults = [] ## This list will include labels \
-##indicating to which search term the results correspond.
+
 
 import urllib2 ## There's also urllib, but @Fichtitious \
 ##recommended urllib2.
 
 page = urllib2.urlopen ('http://www.dclibrary.org/newsreleases')
 
-content = page.read() ## Some people on the #python freenode irc \
-##recommended this.
+content = page.read() 
+
 
 import re
+
+
 for term in SEARCHTERMS:
-    termResults = re.findall ('(?i)' + HEADER + '.*' + term + '.*' + HEADER, content) ## '(?i)' \
-    ### There's a chance the above might work if I told it not to stop \
-    ###searching at the end of a line. Otherwise, I should roll back to my previous commit.
-    
-    ### I commented out the line below, which works, to experiment with new \
-    ### strategy.
-    ## termResults = re.findall ('(?i)' + term + '.*' , content) ## '(?i)' \
-##makes it case insensitive. It needs to come at the beginning.
+
+    body = re.compile('(?i)<p>(.*)' + term + '(.*)</p>')
+
 ##re.findall () returns results at a list.
+    bodyResults = re.findall (body, content)
 
-    results.append (termResults)
 
-    termLabel = ['RESULTS FOR TERM: ' + str.upper (term)]
-    printableResults.append (termLabel)
-    printableResults.append (termResults)
+    
+###If the next few lines worked, it would search for just the headers \
+###followed by successful search term hits.
+##    if len (bodyResults) > 0:
+##        for i in bodyResults:
+##            header = re.compile ('<h3 class="field-content"><a href="/node/(.*)>(.*)' + bodyResults[i])
+##        
+###I still need a way to find just the headers associated with search terms.
+##
+##    header = re.compile ('<h3 class="field-content"><a href="/node/(.*)>(.*)</a></h3>')
+##    headerResults = re.findall(header, content)
+    
+    
+    
+    termUpper = [str.upper (term)] #A label to help separate term results.
+##It might print funny with listPrintLineBreaks, but I don't care.
 
+    results.append (termUpper)
+##    results.append (headerResults)
+    results.append (bodyResults)
+
+
+    
 from listPrintLineBreaks import listPrintLineBreaks
-listPrintLineBreaks (printableResults)
+listPrintLineBreaks (results)
 
-
-### experimental
-headlineResults = re.findall (DCLIBRARYHEADLINEHTML , content)
-
-printableHeadlineResults = []
-printableHeadlineResults.append (headlineResults)
-
-
-listPrintLineBreaks (printableHeadlineResults)
 
 
 
