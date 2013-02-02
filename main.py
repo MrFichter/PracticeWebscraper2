@@ -26,7 +26,7 @@
 
 
 SEARCHTERMS = ('technology' , 'tech ' , 'student' , 'hackathon' , 'hack' , 'hacker' , 'hackers' , 'mobile' ,
-               'computer' , 'book' , 'Computer' , 'Book') ### book is for testing purposes. 
+               'computer' , 'book') ### book is for testing purposes. 
 ##Learning note: Searching for 'book' appears to find 'books' without
 ##a problem.
 
@@ -48,7 +48,7 @@ import re
 for term in SEARCHTERMS:
 
 ###    body = re.compile('(?i)<p>(.*)' + term + '(.*)</p>')
-    header = re.compile('(?i)<h3 class="field-content"><a href="/node/(.*)' + term) ###
+    header = ('(?i)<h3 class="field-content"><a href="/node/(.*)' + term) ###
     
 
 ##re.findall () returns results at a list.
