@@ -11,7 +11,7 @@ content = '''
   <div class="views-field views-field-view-node">        <span class="field-content"><a href="/node/33583">Read full article</a></span>  </div>  </div>
   <div class="views-row views-row-4 views-row-even">
 
- <div class="views-field views-field-title">        <h3 class="field-content"><a href="/node/33175">DC Public Library Collects Toys and Books for Children With HIV/AIDS</a></h3>  </div>  
+ <div class="views-field views-field-title">        <h3 class="field-content"><a href="/node/33175">DC Public Library Collects Toys and for Children With HIV/AIDS</a></h3>  </div>  
   <div class="views-field views-field-field-subtitle">        <h4 class="field-content"></h4>  </div>  
   <div class="views-field views-field-created">        <h5 class="field-content">Published on Monday, December 10, 2012</h5>  </div>  
   <div class="views-field views-field-body">        <div class="field-content"><p> The DC Public Library, in partnership with Bread for the Soul, will collect new, unwrapped toys and books for children with HIV/AIDS and children whose parents have the disease.  <br /><br />The toy drive runs through December 14 for children one – 12 years old. Toys and books can be dropped off at any of the 25 public libraries across the District.  Also partnering with the DC Public Library and Bread for the Soul are  DC Water and the Department of Public Works. <br /><br />Bread for the Soul is a community organization that works with families living with HIV/Aids.  For more information and a list of library locations, visit the DC Public Library at dclibrary.org or call 727-1222. </p>
@@ -23,15 +23,23 @@ content = '''
 
 
 
-
-
-
 header = '((?i)<h3 class="field-content"><a href="/node/.*)'
 
-desiredResults = re.search(header + '(.*)' '(book)', content)
 
-##print desiredResults   
-groupedResults = desiredResults.group(1,3)
-print groupedResults
 
-   
+separateLines = re.split ('\n+' , content)
+
+for i in range (len(separateLines)):
+    desiredResults = re.findall('(?i).*book.*', separateLines[i])
+    if len (desiredResults) > 0:
+        print 'HEADER' , separateLines[i-3]
+        print '\n'
+        print 'CONTENT' , desiredResults
+
+
+
+        
+
+
+
+
