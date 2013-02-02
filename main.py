@@ -48,13 +48,12 @@ import re
 for term in SEARCHTERMS:
 
 ###    body = re.compile('(?i)<p>(.*)' + term + '(.*)</p>')
-    header = ('(?i)<h3 class="field-content"><a href="/node/(.*)' + term) ###
+    header = ('(?i)<h3 class="field-content"><a href="/node/') ###
     
 
 ##re.findall () returns results at a list.
 ###    bodyResults = re.findall (body, content)
-    bodyResults = re.search(header, content)
-###re.search hits, but re.match does not
+    bodyResults = re.search(header + '.*' + term, content)
 
     
 ###If the next few lines worked, it would search for just the headers \
@@ -68,7 +67,9 @@ for term in SEARCHTERMS:
 ##    header = re.compile ('<h3 class="field-content"><a href="/node/(.*)>(.*)</a></h3>')
 ##    headerResults = re.findall(header, content)
     
-    
+    if bodyResults:
+        groupedResults = bodyResults.group(1,3)
+        print groupedResults
     
     termUpper = [str.upper (term)] #A label to help separate term results.
 ##It might print funny with listPrintLineBreaks, but I don't care.
@@ -76,13 +77,15 @@ for term in SEARCHTERMS:
     results.append (termUpper)
 ##    results.append (headerResults)
     results.append (bodyResults)
-
+    
 
     
 from listPrintLineBreaks import listPrintLineBreaks
 ###listPrintLineBreaks (results)
 
 print (results) ###
+
+
 
 
 
