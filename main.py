@@ -46,14 +46,18 @@ import re
 
 
 separateLines = re.split ('\n+' , content)
+##I don't know what the n+ means, but here's where I got it from:
+##http://docs.python.org/2/library/re.html#making-a-phonebook
 
 
 
 for i in range (len(separateLines)):
 
     for term in SEARCHTERMS:
+
         termResults = re.findall('(?i).*' + term + '.*', separateLines[i])
-        if len (termResults) > 0:
+
+        if len (termResults) > 0: ## i.e If it's a real hit....
 
             termUpper = [str.upper (term)] #A label to help separate term results.
 ##            results.append (termUpper)
@@ -63,7 +67,8 @@ for i in range (len(separateLines)):
 
             print '\n'
             print ' TERM:' , termUpper
-            print 'HEADER:' , separateLines[i-3]
+            print 'HEADER:' , separateLines[i-3] ##Note: the header comes
+            ##three lines before the content in this doc.
             print 'CONTENT:' , termResults
             print '\n'
                 
