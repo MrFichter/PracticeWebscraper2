@@ -46,8 +46,12 @@ import re
 
 
 separateLines = re.split ('\n+' , content)
-##I don't know what the n+ means, but here's where I got it from:
+##Got re.split idea from:
 ##http://docs.python.org/2/library/re.html#making-a-phonebook
+###Would it be easier to write it to a file and just go line by line through \
+###the file?
+
+
 
 
 
@@ -59,16 +63,26 @@ for i in range (len(separateLines)):
 
         if len (termResults) > 0: ## i.e If it's a real hit....
 
+            header = '\d">.*</a' ##From the HTML. \d means one digit.
+            strHeader = str(re.findall(header, separateLines[i-3])) ## Why \
+##            i-3? Because the header comes three lines before the content
+##            in this document.
+            ###Could I skip the i-3 if I knew how to do backreferencing or
+            ###multiline searches?
+            frontHeaderScrub = re.sub('\d">' , '' , strHeader ) ##Replaces \
+##            the HTML in front with nothing
+            allHeaderScrub = re.sub ('</a' , '' , frontHeaderScrub) ##Scrubs \
+##            back, too.
+           
+
             termUpper = [str.upper (term)] #A label to help separate term results.
+
 ##            results.append (termUpper)
-##
-##            
-##            results.append (separateLines[i-3])
+##            results.append (allHeaderScrub)
 
             print '\n'
             print ' TERM:' , termUpper
-            print 'HEADER:' , separateLines[i-3] ##Note: the header comes
-            ##three lines before the content in this doc.
+            print 'HEADER:' , allHeaderScrub
             print 'CONTENT:' , termResults
             print '\n'
                 
