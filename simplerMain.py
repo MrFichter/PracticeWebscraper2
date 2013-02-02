@@ -28,7 +28,7 @@ content = '''
 
 header = '((?i)<h3 class="field-content"><a href="/node/.*)'
 
-desiredResults = re.search('((?i)<h3 class="field-content"><a href="/node/.*)' '(.*)' '(book)', content)
+desiredResults = re.search(header + '(.*)' '(book)', content)
 
 ##print desiredResults   
 groupedResults = desiredResults.group(1,3)
