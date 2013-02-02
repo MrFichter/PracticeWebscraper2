@@ -26,7 +26,7 @@
 
 
 SEARCHTERMS = ('technology' , 'tech ' , 'student' , 'hackathon' , 'hack' , 'hacker' , 'hackers' , 'mobile' ,
-               'computer' , 'book' ) ### book is for testing purposes. 
+               'computer' , 'book' , 'Computer' , 'Book') ### book is for testing purposes. 
 ##Learning note: Searching for 'book' appears to find 'books' without
 ##a problem.
 
@@ -47,11 +47,14 @@ import re
 
 for term in SEARCHTERMS:
 
-    body = re.compile('(?i)<p>(.*)' + term + '(.*)</p>')
+###    body = re.compile('(?i)<p>(.*)' + term + '(.*)</p>')
+    header = re.compile('(?i)<h3 class="field-content"><a href="/node/(.*)' + term) ###
+    
 
 ##re.findall () returns results at a list.
-    bodyResults = re.findall (body, content)
-
+###    bodyResults = re.findall (body, content)
+    bodyResults = re.search(header, content)
+###re.search hits, but re.match does not
 
     
 ###If the next few lines worked, it would search for just the headers \
@@ -77,7 +80,9 @@ for term in SEARCHTERMS:
 
     
 from listPrintLineBreaks import listPrintLineBreaks
-listPrintLineBreaks (results)
+###listPrintLineBreaks (results)
+
+print (results) ###
 
 
 
