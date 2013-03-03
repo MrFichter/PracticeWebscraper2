@@ -12,7 +12,7 @@ headerNonGreedy = '<h3 class.*?h3'
 headerGreedy = '<h3 class.*h3' ## Yields same results as headerNonGreedy.
 anythingNonGreedy = '.*?' ## Doesn't seem to do much.
 term = 'weather'
-endParagraph = '</p>'
+endParagraph = '</a></span>  </div>  </div>'
 
 
 
@@ -27,7 +27,7 @@ pageWithParagraphBreaks = re.sub (endParagraph , '\n' , pageWithoutNewLines)
 
 
 
-results = re.findall (headerGreedy + '.*' + term, \
+results = re.findall (headerGreedy + '.*' + term + '.*' + '\n', \
 pageWithParagraphBreaks) ##Putting the \ character above does not seem \
 ##to cause any problems.
 
